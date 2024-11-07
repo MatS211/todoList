@@ -19,7 +19,7 @@
         <button type="button" onclick="addTask()" id="add">Dodaj zadanie</button>
     </form>
     <hr>
-    <br><br><br><br>
+    <br><br>
     <table>
         <tr>
             <!-- <th>ID</th> -->
@@ -38,8 +38,8 @@
                 <td>{{ task[3] }}</td>
                 <td>{{ task[4] }}</td>
                 <td>
-                    <button onclick="editTask({{ task[0] }})" id="edit">Edytuj</button>
-                    <button onclick="deleteTask({{ task[0] }})" id="delete">Usuń</button>
+                    <button onclick="editTask( '{{ task[0] }}')" id="edit">Edytuj</button>
+                    <button onclick="deleteTask('{{ task[0] }}')" id="delete">Usuń</button>
                 </td>
             </tr>
             {% endfor %}
