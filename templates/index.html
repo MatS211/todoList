@@ -6,6 +6,12 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <title>LISTA TO DO</title>
+    <!-- do datatables -->
+    <!-- CSS-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <!-- JS i jQ -->
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
     <header>
@@ -20,18 +26,20 @@
     </form>
     <hr>
     <br><br>
-    <table>
-        <tr>
-            <!-- <th>ID</th> -->
-            <th>Tytuł</th>
-            <th>Opis</th>
-            <th>Status</th>
-            <th>Data utworzenia</th>
-            <th>Operacje</th>
-        </tr>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <!-- <th>ID</th> -->
+                <th>Tytuł</th>
+                <th>Opis</th>
+                <th>Status</th>
+                <th>Data utworzenia</th>
+                <th>Operacje</th>
+            </tr>
+        </thead>    
         <tbody>
             {% for task in tasks %}
-            <tr>
+            <tr id="rekord">
                 <!-- <td>{{ task[0] }}</td> -->
                 <td>{{ task[1] }}</td>
                 <td>{{ task[2] }}</td>
@@ -46,5 +54,15 @@
         </tbody>
     </table>
     <footer></footer>
+
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+            "paging": true,  // Paginacja
+            "searching": true, // Wyszukiwanie
+            "ordering": true  // Sortowanie
+            })
+        });
+    </script>
 </body>
 </html>
