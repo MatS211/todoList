@@ -1,3 +1,27 @@
 table, tr, td, th{
-    border: 1px solid black;
+    text-align: center;
+    border: 1px solid cadetblue;
+}
+
+h3, #form_add{
+    text-align: center;
+    align-items: center;
+}
+
+#add{
+    background-color: lightgreen;
+
+}
+
+#delete{
+    background-color: lightcoral;
+}
+
+#edit{
+    background-color: yellow;
+}
+
+table{
+    margin-left: auto;
+    margin-right: auto
 }

@@ -10,16 +10,15 @@
 <body>
     <header>
     </header>
-
-    <h4>Dodaj nowe zadanie</h4>
+    <h3>Dodaj nowe zadanie</h3>
     <form id="form_add">
-        <label for="tytul">Tytuł</label>
-        <input type="text" id="tytul" name="tytul" required>
-        <label for="opis">Opis</label>
-        <input type="text" id="opis" name="opis" required>
-        <button type="button" onclick="addTask()">Dodaj zadanie</button>
+        <label for="tytul">Tytuł:</label>
+        <input type="text" id="tytul" name="tytul" required>&nbsp;
+        <label for="opis">Opis:</label>
+        <input type="text" id="opis" name="opis" required><br><br>
+        <button type="button" onclick="addTask()" id="add">Dodaj zadanie</button>
     </form>
-    </form>
+    <hr>
     <br><br><br><br>
     <table>
         <tr>
@@ -39,8 +38,8 @@
                 <td>{{ task[3] }}</td>
                 <td>{{ task[4] }}</td>
                 <td>
-                    <button onclick="editTask({{ task[0] }})">Edytuj</button>
-                    <button onclick="deleteTask({{ task[0] }})">Usuń</button>
+                    <button onclick="editTask({{ task[0] }})" id="edit">Edytuj</button>
+                    <button onclick="deleteTask({{ task[0] }})" id="delete">Usuń</button>
                 </td>
             </tr>
             {% endfor %}
