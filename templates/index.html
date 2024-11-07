@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <title>LISTA TO DO</title>
+</head>
+<body>
+    <header>
+    </header>
+
+    <h4>Dodaj nowe zadanie</h4>
+    <form id="form_add">
+        <label for="tytul">Tytuł</label>
+        <input type="text" id="tytul" name="tytul" required>
+        <label for="opis">Opis</label>
+        <input type="text" id="opis" name="opis" required>
+        <button type="button" onclick="addTask()">Dodaj zadanie</button>
+    </form>
+    </form>
+    <br><br><br><br>
+    <table>
+        <tr>
+            <!-- <th>ID</th> -->
+            <th>Tytuł</th>
+            <th>Opis</th>
+            <th>Status</th>
+            <th>Data utworzenia</th>
+            <th>Operacje</th>
+        </tr>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <!-- <td>{{ task[0] }}</td> -->
+                <td>{{ task[1] }}</td>
+                <td>{{ task[2] }}</td>
+                <td>{{ task[3] }}</td>
+                <td>{{ task[4] }}</td>
+                <td>
+                    <button onclick="editTask({{ task[0] }})">Edytuj</button>
+                    <button onclick="deleteTask({{ task[0] }})">Usuń</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <footer></footer>
+</body>
+</html>
