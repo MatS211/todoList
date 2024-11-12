@@ -1,3 +1,8 @@
+body{
+    margin-left: 0;
+    margin-right: 0;
+}
+
 h3, #form_add{
     text-align: center;
     align-items: center;
@@ -16,14 +21,15 @@ h3, #form_add{
     background-color: yellow;
 }
 
-table{
-    margin-left: auto;
-    margin-right: auto
-}
-
-table{
+#myTable{
     border: 1px solid grey;
 }
+
+#myTable_wrapper{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
 
 #rekord:hover{
     background-color: rgb(202, 196, 196);
