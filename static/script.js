@@ -1,3 +1,17 @@
+function new_date(){
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2,"0");
+    const day = String(date.getDate()).padStart(2,"0");
+    const hour = String(date.getHours()).padStart(2,"0");
+    const minutes = String(date.getMinutes()).padStart(2,"0");
+    const seconds = String(date.getSeconds()).padStart(2,"0");
+    
+    return `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
+}
+
+
+
 function addTask(){
     const tytul = document.getElementById("tytul").value;
     const opis = document.getElementById("opis").value;
@@ -19,7 +33,7 @@ function addTask(){
                 <td>${data.tytul}</td>
                 <td>${data.opis}</td>
                 <td>${data.status = "0"}</td>
-                <td>${new Date().toLocaleDateString()}</td>
+                <td>${new_date()}</td>
                 <td>
                     <button onclick="editTask(${data.id})">Edytuj</button>
                     <button onclick="deleteTask(${data.id})">Usuń</button>
@@ -29,6 +43,7 @@ function addTask(){
 
             // document.getElementById("tytul").value = "";
             // document.getElementById("opis").value = "";
+            location.reload();
         } else {
             alert("Błąd podczas dodawania zadania: " + (data.error || "Nieznany błąd"));
         }
@@ -88,6 +103,7 @@ function deleteTask(taskId) {
             if (data.message) {
                 const row = document.getElementById(`task-${taskId}`);
                 if (row) row.remove();
+                location.reload();
             } else {
                 alert("Błąd podczas usuwania zadania: " + (data.error || "Nieznany błąd"));
             }
