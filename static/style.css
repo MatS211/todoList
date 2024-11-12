@@ -34,3 +34,18 @@ h3, #form_add{
 #rekord:hover{
     background-color: rgb(202, 196, 196);
 }
+
+#nav_panel{
+    display: flex;
+    flex-direction: row;     
+    width: 100%;
+}
+
+h4{
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    margin: 20px;
+}

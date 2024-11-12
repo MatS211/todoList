@@ -28,6 +28,9 @@ def index():
     connection.close()
     return render_template("index.html", tasks=tasks)
 
+@app.route("/templates/stats.html")
+def stats():
+    return render_template("stats.html")
 
 
 @app.route("/api/add", methods = ['POST'])
@@ -35,20 +38,21 @@ def add():
     new_task = request.get_json()
     tytul = new_task.get('tytul')
     opis = new_task.get('opis')
+    kategoria = new_task.get('kategoria')
     if not new_task or "tytul" not in new_task or "opis" not in new_task:
-        return jsonify({"error": "Brak wymaganego pola 'tytul' lub 'opis'"}), 400
+        return jsonify({"error": "Brak wymaganego pola 'tytul', 'opis' lub 'kategoria'"}), 400
     
     connection = get_db_connection()
     cursor = connection.cursor()
     try:
         cursor.execute(
-            "INSERT INTO tasks(tytul, opis) VALUES (%s, %s)",
-            (tytul, opis)
+            "INSERT INTO tasks(tytul, opis, kategoria) VALUES (%s, %s, %s)",
+            (tytul, opis, kategoria)
         )
         connection.commit()
         new_task_id = cursor.lastrowid
 
-        return jsonify({"id": new_task_id, "tytul": tytul, "opis": opis}), 201
+        return jsonify({"id": new_task_id, "tytul": tytul, "opis": opis, "kategoria": kategoria}), 201
     
     except Exception as e:
         return jsonify({"error": "Wystąpił błąd", "szczegoly":str(e)}), 500
@@ -87,16 +91,17 @@ def update(task_id):
         
         new_title = update_task.get("tytul", current_task[1])
         new_description = update_task.get("opis", current_task[2])
-        new_status = update_task.get("status", current_task[3])
+        new_category = update_task.get("kategoria", current_task[3])
+        new_status = update_task.get("status", current_task[4])
 
         # Aktualizacja rekordu w bazie
         cursor.execute(
-            "UPDATE tasks SET tytul = %s, opis = %s, status = %s WHERE ID = %s",
-            (new_title, new_description, new_status, task_id)
+            "UPDATE tasks SET tytul = %s, opis = %s, kategoria = %s, status = %s WHERE ID = %s",
+            (new_title, new_description, new_category,new_status, task_id)
         )
         
         connection.commit()
-        return jsonify({"tytul": new_title, "opis": new_description, "status": new_status, "id": task_id}), 200
+        return jsonify({"tytul": new_title, "opis": new_description, "kategoria": new_category  ,"status": new_status, "id": task_id}), 200
 
     except Exception as e:
         return jsonify({"error": "Wystąpił błąd", "szczegoly":str(e)}), 500

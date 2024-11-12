@@ -15,13 +15,14 @@ function new_date(){
 function addTask(){
     const tytul = document.getElementById("tytul").value;
     const opis = document.getElementById("opis").value;
+    const kategoria = document.getElementById("kategoria").value;
     
     fetch("/api/add", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ tytul, opis })
+        body: JSON.stringify({ tytul, opis, kategoria})
     })
     .then(response => response.json())
     .then(data => {
@@ -32,6 +33,7 @@ function addTask(){
             newRow.innerHTML = `
                 <td>${data.tytul}</td>
                 <td>${data.opis}</td>
+                <td>${data.kategoria}</td>
                 <td>${data.status = "0"}</td>
                 <td>${new_date()}</td>
                 <td>
@@ -58,11 +60,13 @@ function addTask(){
 function editTask(taskId) {
     const newTytul = prompt("Podaj nowy tytuł (pozostaw puste, aby nie zmieniać):");
     const newOpis = prompt("Podaj nowy opis (pozostaw puste, aby nie zmieniać):");
+    const newKategoria = prompt("Podaj nową kategorię (pozostaw puste, aby nie zmieniać):");
     const newStatus = prompt("Podaj nowy status (pozostaw puste, aby nie zmieniać):");
 
     const updatedFields = {};
     if (newTytul) updatedFields.tytul = newTytul;
     if (newOpis) updatedFields.opis = newOpis;
+    if (newKategoria) updatedFields.kategoria = newKategoria;
     if (newStatus) updatedFields.status = newStatus;
 
     if (Object.keys(updatedFields).length === 0) {
@@ -82,7 +86,9 @@ function editTask(taskId) {
         if (!data.error) {
             if (data.tytul) document.querySelector(`#task-${taskId} td:nth-child(1)`).innerText = data.tytul;
             if (data.opis) document.querySelector(`#task-${taskId} td:nth-child(2)`).innerText = data.opis;
-            if (data.status !== undefined) document.querySelector(`#task-${taskId} td:nth-child(3)`).innerText = data.status;
+            if (data.kategoria) document.querySelector(`#task-${taskId} td:nth-child(3)`).innerText = data.kategoria;
+            if (data.status == 0 || data.status == 1) document.querySelector(`#task-${taskId} td:nth-child(4)`).innerText = data.status;
+            location.reload();
         } else {
             alert("Błąd podczas edycji zadania: " + data.error);
         }

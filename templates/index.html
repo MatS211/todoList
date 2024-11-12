@@ -15,13 +15,19 @@
 </head>
 <body>
     <header>
+        <div id="nav_panel">
+            <h4><a href="/">Strona główna</a></h4>
+            <h4><a href="/templates/stats.html">Statystyki</a></h4>
+        </div>
     </header>
     <h3>Dodaj nowe zadanie</h3>
     <form id="form_add">
         <label for="tytul">Tytuł:</label>
         <input type="text" id="tytul" name="tytul" required>&nbsp;
         <label for="opis">Opis:</label>
-        <input type="text" id="opis" name="opis" required><br><br>
+        <input type="text" id="opis" name="opis" required>&nbsp;
+        <label for="kategoria">Kategoria:</label>
+        <input type="text" id="kategoria" name="kategoria" required><br><br>
         <button type="button" onclick="addTask()" id="add">Dodaj zadanie</button>
     </form>
     <hr>
@@ -32,6 +38,7 @@
                 <!-- <th>ID</th> -->
                 <th>Tytuł</th>
                 <th>Opis</th>
+                <th>Kategoria</th>
                 <th>Status</th>
                 <th>Data utworzenia</th>
                 <th>Operacje</th>
@@ -45,6 +52,7 @@
                 <td>{{ task[2] }}</td>
                 <td>{{ task[3] }}</td>
                 <td>{{ task[4] }}</td>
+                <td>{{ task[5] }}</td>
                 <td>
                     <button onclick="editTask( '{{ task[0] }}')" id="edit">Edytuj</button>
                     <button onclick="deleteTask('{{ task[0] }}')" id="delete">Usuń</button>
