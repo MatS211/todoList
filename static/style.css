@@ -3,9 +3,9 @@
 }
 
 body{
-    margin-top: 0;
     margin-left: 0;
     margin-right: 0;
+    margin-top: 60px;
 }
 
 h3, #form_add{
@@ -40,22 +40,28 @@ h3, #form_add{
     background-color: rgb(202, 196, 196);
 }
 
-header{   
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    box-sizing: border-box;
-    /* position: fixed; */
-    border: none;
-    box-shadow: 0 8px 8px -10px rgba(0,0,0,.15);
-    display: block;
     background-color:rgb(216, 214, 214);
-    padding: 10px;
-    justify-content: center;
+    color: white;
+    padding: 10px 0;
+    z-index: 1000;
+    box-shadow: 0 8px 8px -10px rgba(0,0,0,.15);
+
+}
+
+#nav_panel {
+    display: flex;
+    justify-content: space-around;
     align-items: center;
 }
 
-h4{
-    text-align: center;
-    display: inline-block;
+header h4 {
+    margin: 0;
+    font-size: 20px;
 }
 
 a{
@@ -72,4 +78,5 @@ a{
     display: flex;
     justify-content: center; 
     align-items: center;     
+    padding: 30px;
 }

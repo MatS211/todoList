@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Data utworzenia',
+                        label: 'Ilość zadań',
                         data: values,
                         backgroundColor: [
                             'rgba(66, 135, 245, 0.4)',
