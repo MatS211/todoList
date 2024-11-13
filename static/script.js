@@ -11,7 +11,6 @@ function new_date(){
 }
 
 
-
 function addTask(){
     const tytul = document.getElementById("tytul").value;
     const opis = document.getElementById("opis").value;
@@ -100,8 +99,6 @@ function editTask(taskId) {
     // });
 }
 
-
-
 function deleteTask(taskId) {
     fetch(`/api/delete/${taskId}`, { method: "DELETE" })
         .then(response => response.json())
@@ -114,4 +111,4 @@ function deleteTask(taskId) {
                 alert("Błąd podczas usuwania zadania: " + (data.error || "Nieznany błąd"));
             }
         });
-}
+}          

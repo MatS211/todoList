@@ -28,18 +28,13 @@ def index():
     connection.close()
     return render_template("index.html", tasks=tasks)
 
-@app.route("/templates/stats.html")
-def stats():
-    return render_template("stats.html")
-
-
 @app.route("/api/add", methods = ['POST'])
 def add():
     new_task = request.get_json()
     tytul = new_task.get('tytul')
     opis = new_task.get('opis')
     kategoria = new_task.get('kategoria')
-    if not new_task or "tytul" not in new_task or "opis" not in new_task:
+    if not new_task or "tytul" not in new_task or "opis" not in new_task or "kategoria" not in new_task:
         return jsonify({"error": "Brak wymaganego pola 'tytul', 'opis' lub 'kategoria'"}), 400
     
     connection = get_db_connection()
@@ -153,7 +148,32 @@ def show_by_id(task_id):
     finally:
         cursor.close()
         connection.close()
-       
+
+@app.route("/stats")
+def stats():
+    return render_template("stats.html")
+
+
+@app.route("/api/stats")
+def stats_api():
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    try:
+        cursor.execute("SELECT kategoria, COUNT(*) from tasks GROUP BY kategoria")
+        result = cursor.fetchall()
+        
+        labels = [row[0] for row in result]   # Kategorie
+        values = [row[1] for row in result]   # Liczba zadań
+
+        return jsonify({"labels": labels, "values": values})
+    
+    except Exception as e:
+        return jsonify({"error":"Wystąpił błąd", "szczegoly": str(e)}), 500
+    
+    finally:
+        cursor.close()
+        connection.close()
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")

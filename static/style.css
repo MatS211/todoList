@@ -1,4 +1,9 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 body{
+    margin-top: 0;
     margin-left: 0;
     margin-right: 0;
 }
@@ -35,17 +40,36 @@ h3, #form_add{
     background-color: rgb(202, 196, 196);
 }
 
-#nav_panel{
-    display: flex;
-    flex-direction: row;     
+header{   
     width: 100%;
+    box-sizing: border-box;
+    /* position: fixed; */
+    border: none;
+    box-shadow: 0 8px 8px -10px rgba(0,0,0,.15);
+    display: block;
+    background-color:rgb(216, 214, 214);
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 h4{
     text-align: center;
+    display: inline-block;
 }
 
 a{
     text-decoration: none;
     margin: 20px;
+}
+
+#myChart {
+    width: 600px;
+    height: 600px;
+}
+
+.pie{
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
 }
