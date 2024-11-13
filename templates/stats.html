@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <script src="{{ url_for('static', filename='pie.js') }}"></script> 
+    <script src="{{ url_for('static', filename='stats.js') }}"></script> 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>LISTA TO DO - statystyki</title>
 </head>
@@ -19,12 +19,12 @@
     <main>
         <h3>Wykres przedstawiający ilość użycia poszczególnych kategorii</h3>
         <div class="pie">
-            <canvas id="myChart"></canvas>
+            <canvas id="myChartPie"></canvas>
 
         </div>
         <h3>Wykres przedstawiający ilość dodanych zadań każdego dnia</h3>
         <div class="line">
-
+            <canvas id="myChartLine"></canvas>
         </div>
     </main>
 </body>

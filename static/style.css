@@ -63,12 +63,12 @@ a{
     margin: 20px;
 }
 
-#myChart {
+#myChartPie, #myChartLine {
     width: 600px;
     height: 600px;
 }
 
-.pie{
+.pie, .line{
     display: flex;
     justify-content: center; 
     align-items: center;     

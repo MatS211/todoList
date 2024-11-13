@@ -154,8 +154,8 @@ def stats():
     return render_template("stats.html")
 
 
-@app.route("/api/stats")
-def stats_api():
+@app.route("/api/stats/pie")
+def stats_api_pie():
     connection = get_db_connection()
     cursor = connection.cursor()
     try:
@@ -174,6 +174,25 @@ def stats_api():
         cursor.close()
         connection.close()
 
+@app.route("/api/stats/line")
+def stats_api_line():
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    try:
+        cursor.execute("SELECT DATE(data_utworzenia), COUNT(*) FROM tasks GROUP BY DATE(data_utworzenia) ORDER BY DATE(data_utworzenia);")
+        result = cursor.fetchall()
+        
+        labels = [row[0] for row in result]   # Data utworzenia
+        values = [row[1] for row in result]   # Ilość
+
+        return jsonify({"labels": labels, "values": values})
+    
+    except Exception as e:
+        return jsonify({"error":"Wystąpił błąd", "szczegoly": str(e)}), 500
+    
+    finally:
+        cursor.close()
+        connection.close()
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")
