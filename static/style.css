@@ -69,9 +69,14 @@ a{
     margin: 20px;
 }
 
-#myChartPie, #myChartLine {
-    width: 600px;
-    height: 600px;
+#myChartPie{
+    width: 350px;
+    height: 350px;
+}
+
+#myChartLine {
+    width: 700px;
+    height: 700px;
 }
 
 .pie, .line{
