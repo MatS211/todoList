@@ -46,7 +46,7 @@
         </thead>    
         <tbody>
             {% for task in tasks %}
-            <tr id="rekord">
+            <tr id="task-{{ task[0] }}" id="rekord">
                 <!-- <td>{{ task[0] }}</td> -->
                 <td>{{ task[1] }}</td>
                 <td>{{ task[2] }}</td>

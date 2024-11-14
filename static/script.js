@@ -83,10 +83,19 @@ function editTask(taskId) {
     .then(response => response.json())
     .then(data => {
         if (!data.error) {
+            console.log(taskId)
+            console.log(document.querySelector(`#task-${taskId}`));
             if (data.tytul) document.querySelector(`#task-${taskId} td:nth-child(1)`).innerText = data.tytul;
             if (data.opis) document.querySelector(`#task-${taskId} td:nth-child(2)`).innerText = data.opis;
             if (data.kategoria) document.querySelector(`#task-${taskId} td:nth-child(3)`).innerText = data.kategoria;
-            if (data.status == 0 || data.status == 1) document.querySelector(`#task-${taskId} td:nth-child(4)`).innerText = data.status;
+            const status = parseInt(data.status);
+            if (status === 0 || status === 1){
+                document.querySelector(`#task-${taskId} td:nth-child(4)`).innerText = status;}
+            else{               
+                alert(`Nieoczekiwany status: ${data.status}`);
+                document.querySelector(`#task-${taskId} td:nth-child(4)`).innerText = "0";
+                }
+                
             location.reload();
         } else {
             alert("Błąd podczas edycji zadania: " + data.error);

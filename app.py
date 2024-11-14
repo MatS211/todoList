@@ -88,7 +88,9 @@ def update(task_id):
         new_description = update_task.get("opis", current_task[2])
         new_category = update_task.get("kategoria", current_task[3])
         new_status = update_task.get("status", current_task[4])
-
+        if new_status != 0 and new_status != 1:
+            new_status = 0
+    
         # Aktualizacja rekordu w bazie
         cursor.execute(
             "UPDATE tasks SET tytul = %s, opis = %s, kategoria = %s, status = %s WHERE ID = %s",
