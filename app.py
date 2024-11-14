@@ -196,5 +196,28 @@ def stats_api_line():
         cursor.close()
         connection.close()
 
+
+@app.route("/api/stats/pie2")
+def stats_api_pie2():
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    try:
+        cursor.execute("SELECT status, COUNT(*) from tasks GROUP BY status;")
+        result = cursor.fetchall()
+        nazwa_statusu={
+            0: "Niewykonane",
+            1: "Wykonane"
+        }
+        labels = [nazwa_statusu.get(row[0], row[0]) for row in result]   # Status
+        values = [row[1] for row in result]   # Ilość
+        
+        return jsonify({"labels":labels, "values":values})
+    
+    except Exception as e:
+        return jsonify({"error":"Wystąpił błąd", "szczegoly": str(e)}), 500
+    finally:
+        cursor.close()
+        connection.close()
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0")
