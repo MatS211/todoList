@@ -66,14 +66,13 @@ function editTask(taskId) {
     if (newTytul) updatedFields.tytul = newTytul;
     if (newOpis) updatedFields.opis = newOpis;
     if (newKategoria) updatedFields.kategoria = newKategoria;
-    // if (newStatus) updatedFields.status = newStatus;
     if (newStatus !== "") {
-        const statusInt = parseInt(newStatus);  // Konwertowanie na liczbę
+        const statusInt = parseInt(newStatus);
         if (statusInt === 0 || statusInt === 1) {
             updatedFields.status = statusInt;
         } else {
             alert("Status musi być 0 lub 1.");
-            return; // Zakończ funkcję, aby nie wysłać niepoprawnego statusu
+            return;
         }
     }
 

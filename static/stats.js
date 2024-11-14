@@ -110,6 +110,22 @@ document.addEventListener('DOMContentLoaded', function () {
                             position: 'top',
                         }
                     },
+                    // scales: {
+                    //     x: {
+                    //         type: 'time',
+                    //         time: {
+                    //             unit: 'day',
+                    //             tooltipFormat: 'll', // format tooltipu
+                    //             displayFormats: {
+                    //                 day: 'DD MMM YYYY' // format dla dni
+                    //             }
+                    //         },
+                    //         title: {
+                    //             display: true,
+                    //             text: 'Data'
+                    //         }
+                    //     }
+                    // },
                     animation: {
                         animateScale: true,
                         animateRotate: true

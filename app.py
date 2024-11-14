@@ -99,8 +99,6 @@ def update(task_id):
         
         connection.commit()
 
-        print(f"Received status: {new_status} (type: {type(new_status)})")  # Sprawdzamy wartość i typ
-
         return jsonify({"tytul": new_title, "opis": new_description, "kategoria": new_category  ,"status": new_status, "id": task_id}), 200
 
     except Exception as e:

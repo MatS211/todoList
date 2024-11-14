@@ -21,14 +21,14 @@
         </div>
     </header>
     <h3>Dodaj nowe zadanie</h3>
-    <form id="form_add">
+    <form id="form_add" onsubmit="addTask(); return false">
         <label for="tytul">Tytuł:</label>
         <input type="text" id="tytul" name="tytul" required>&nbsp;
         <label for="opis">Opis:</label>
         <input type="text" id="opis" name="opis" required>&nbsp;
         <label for="kategoria">Kategoria:</label>
         <input type="text" id="kategoria" name="kategoria" required><br><br>
-        <button type="button" onclick="addTask()" id="add">Dodaj zadanie</button>
+        <button type="submit" id="add">Dodaj zadanie</button>
     </form>
     <hr>
     <br><br>
