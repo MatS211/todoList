@@ -68,7 +68,20 @@
             $('#myTable').DataTable({
             "paging": true,  // Paginacja
             "searching": true, // Wyszukiwanie
-            "ordering": true  // Sortowanie
+            "ordering": true,  // Sortowanie
+            "columnDefs": [
+                    {
+                        "targets": 3,  // Indeks kolumny 
+                        "render": function(data, type, row) {
+                            if (data == 1) {
+                                return '&#x2705;'; // 1 = ✅
+                            } else if (data == 0) {
+                                return '&#10060;'; // 0 = ❌
+                            }
+                            return data;
+                        }
+                    }
+                ]
             })
         });
 

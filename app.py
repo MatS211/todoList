@@ -88,7 +88,7 @@ def update(task_id):
         new_description = update_task.get("opis", current_task[2])
         new_category = update_task.get("kategoria", current_task[3])
         new_status = update_task.get("status", current_task[4])
-        if new_status != 0 and new_status != 1:
+        if new_status not in[0,1]:
             new_status = 0
     
         # Aktualizacja rekordu w bazie
@@ -98,6 +98,9 @@ def update(task_id):
         )
         
         connection.commit()
+
+        print(f"Received status: {new_status} (type: {type(new_status)})")  # Sprawdzamy wartość i typ
+
         return jsonify({"tytul": new_title, "opis": new_description, "kategoria": new_category  ,"status": new_status, "id": task_id}), 200
 
     except Exception as e:

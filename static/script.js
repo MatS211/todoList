@@ -60,13 +60,22 @@ function editTask(taskId) {
     const newTytul = prompt("Podaj nowy tytuł (pozostaw puste, aby nie zmieniać):");
     const newOpis = prompt("Podaj nowy opis (pozostaw puste, aby nie zmieniać):");
     const newKategoria = prompt("Podaj nową kategorię (pozostaw puste, aby nie zmieniać):");
-    const newStatus = prompt("Podaj nowy status (pozostaw puste, aby nie zmieniać):");
+    const newStatus = prompt("Podaj nowy status (0 - zadanie niewykonane, 1 - zadanie wykonane) (pozostaw puste, aby nie zmieniać):");
 
     const updatedFields = {};
     if (newTytul) updatedFields.tytul = newTytul;
     if (newOpis) updatedFields.opis = newOpis;
     if (newKategoria) updatedFields.kategoria = newKategoria;
-    if (newStatus) updatedFields.status = newStatus;
+    // if (newStatus) updatedFields.status = newStatus;
+    if (newStatus !== "") {
+        const statusInt = parseInt(newStatus);  // Konwertowanie na liczbę
+        if (statusInt === 0 || statusInt === 1) {
+            updatedFields.status = statusInt;
+        } else {
+            alert("Status musi być 0 lub 1.");
+            return; // Zakończ funkcję, aby nie wysłać niepoprawnego statusu
+        }
+    }
 
     if (Object.keys(updatedFields).length === 0) {
         alert("Nie dokonano żadnych zmian.");
@@ -83,19 +92,20 @@ function editTask(taskId) {
     .then(response => response.json())
     .then(data => {
         if (!data.error) {
-            console.log(taskId)
-            console.log(document.querySelector(`#task-${taskId}`));
             if (data.tytul) document.querySelector(`#task-${taskId} td:nth-child(1)`).innerText = data.tytul;
             if (data.opis) document.querySelector(`#task-${taskId} td:nth-child(2)`).innerText = data.opis;
             if (data.kategoria) document.querySelector(`#task-${taskId} td:nth-child(3)`).innerText = data.kategoria;
             const status = parseInt(data.status);
             if (status === 0 || status === 1){
-                document.querySelector(`#task-${taskId} td:nth-child(4)`).innerText = status;}
+                if (status === 1) {
+                    document.querySelector(`#task-${taskId} td:nth-child(4)`).innerText = '✅';
+                } else {
+                    document.querySelector(`#task-${taskId} td:nth-child(4)`).innerText = '❌';
+                }}
             else{               
-                alert(`Nieoczekiwany status: ${data.status}`);
+                alert(`Nieoczekiwany status: ${status}`);
                 document.querySelector(`#task-${taskId} td:nth-child(4)`).innerText = "0";
                 }
-                
             location.reload();
         } else {
             alert("Błąd podczas edycji zadania: " + data.error);
